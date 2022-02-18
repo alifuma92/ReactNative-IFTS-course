@@ -13,11 +13,22 @@ import { TouchableOpacity, SafeAreaView, Switch, Text, StyleSheet, View, ScrollV
 import Homepage from './src/Screens/Homepage'
 import Corso from './src/Screens/Corso'
 import Professori from './src/Screens/Professori'
+import Contatti from './src/Screens/Contatti';
+import Calcolatrice from './src/Screens/Calcolatrice';
+
+// import icons
+import Icon from 'react-native-vector-icons/dist/Ionicons';
 
 // import react navigation component
 import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
 
 // common header options
 const headerOptions = {
@@ -31,10 +42,8 @@ const headerOptions = {
     headerBackTitleVisible: false
 }
 
-const App = () => {
+const HomepageStackNavigator = () => {
   return (
-    <NavigationContainer>
-      {/* Rest of your app code */}
       <Stack.Navigator>
         <Stack.Screen 
           name="Homepage" 
@@ -55,7 +64,19 @@ const App = () => {
           options={headerOptions}
         />
       </Stack.Navigator>
-    </NavigationContainer>
+  )
+}
+
+const App = () => {
+  return (
+      <NavigationContainer>
+        {/* Rest of your app code */}
+        <Drawer.Navigator initialRouteName="Homepage">
+          <Drawer.Screen name="Homepage" component={HomepageStackNavigator} />
+          <Drawer.Screen name="Contatti" component={Contatti} />
+          <Drawer.Screen name="Calcolatrice" component={Calcolatrice} />
+        </Drawer.Navigator>
+      </NavigationContainer>
   );
 };
 
